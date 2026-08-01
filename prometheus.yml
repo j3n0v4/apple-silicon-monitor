@@ -1,0 +1,24 @@
+# Apple Silicon Monitor — Prometheus Configuration
+#
+# Scrapes the asimon metrics exporter running on the host.
+# Designed for Homebrew-installed Prometheus (not Docker).
+# On macOS, host.docker.internal resolves to the host machine.
+#
+# Install Prometheus via Homebrew:
+#   brew install prometheus
+#   brew services start prometheus
+#
+# Then symlink or copy this file to the Homebrew config dir:
+#   cp prometheus.yml /opt/homebrew/etc/prometheus.yml
+
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: "asimon"
+    static_configs:
+      - targets: ["host.docker.internal:9100"]
+    metrics_path: /metrics
+    scrape_interval: 5s
+    scrape_timeout: 3s

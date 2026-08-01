@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+.venv/
+venv/
+
+# Environment
+.env
+
+# macOS
+.DS_Store
+
+# Project data (local runtime data, not for GitHub)
+asimon.db
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+data/*.csv
+data/*.txt
+
+# Test artifacts
+.coverage
+.pytest_cache/
+
+# Documentation build
+site/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS metadata
+Thumbs.db

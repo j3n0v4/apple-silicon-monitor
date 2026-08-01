@@ -1,0 +1,41 @@
+[project]
+name = "apple-silicon-monitor"
+version = "0.1.0"
+description = "Real-time hardware + inference monitoring for Apple Silicon LLMs"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+readme = "README.md"
+
+dependencies = [
+    "prometheus-client>=0.19",
+    "aiohttp>=3.9",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "aiosqlite>=0.19",
+    "click>=8.0",
+]
+
+[project.scripts]
+asimon = "asimon.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/j3n0v4/apple-silicon-monitor"
+"Bug Tracker" = "https://github.com/j3n0v4/apple-silicon-monitor/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "pytest-cov>=4.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
