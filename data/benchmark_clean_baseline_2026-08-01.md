@@ -5,7 +5,7 @@ Stack: asimon v0.1.0 + Prometheus + Grafana (Homebrew)
 Method: 4 models × 3 prompts, via asimon proxy (port 11435), stream=false
 Baseline: 47 GB available RAM, 553 MB swap, 0 models loaded
 
-## Inference Performance
+## Inference performance
 
 | Model | Size | Prompt | Eval Tokens | tok/s | Load (s) | Total (s) |
 |-------|------|--------|-------------|-------|----------|------------|
@@ -22,7 +22,7 @@ Baseline: 47 GB available RAM, 553 MB swap, 0 models loaded
 | qwen3.6:35b-a3b-nvfp4 | 21 GB | Medium | 3,986 | **47.23** | 2.58 | 87.25 |
 | qwen3.6:35b-a3b-nvfp4 | 21 GB | Long | 4,839 | **46.66** | 2.38 | 106.45 |
 
-## Average tok/s by Model (across all prompts)
+## Average tok/s by model (across all prompts)
 
 | Model | Size | Avg tok/s | Load (s) | Architecture |
 |-------|------|-----------|-----------|---------------|
@@ -31,7 +31,7 @@ Baseline: 47 GB available RAM, 553 MB swap, 0 models loaded
 | hermes3:8b | 4.7 GB | **39.05** | 2.64 | Dense GGUF |
 | gemma4:12b-nvfp4 | 7.7 GB | **21.39** | 1.92 | Dense NVFP4 |
 
-## Hardware Under Load (Prometheus, 15s intervals)
+## Hardware under load (Prometheus, 15s intervals)
 
 | Metric | Min | Peak | Avg |
 |--------|-----|------|-----|
@@ -46,7 +46,7 @@ Baseline: 47 GB available RAM, 553 MB swap, 0 models loaded
 | Fan 0 | 2,297 | 5,856 | 5,142 |
 | Fan 1 | 2,476 | 6,333 | 5,553 |
 
-## Memory Delta
+## Memory delta
 
 | Metric | Before | After |
 |--------|--------|-------|
@@ -54,9 +54,9 @@ Baseline: 47 GB available RAM, 553 MB swap, 0 models loaded
 | Swap Used | 553 MB | 24.1 GB (stale, models paged out) |
 | Swap Total | 2.0 GB | 24.6 GB (macOS expanded) |
 
-Note: After benchmarks, Ollama unloaded all models. macOS expanded swap to 24 GB during the 35B model run but didn't reclaim it. Available RAM is high because model memory was released.
+Note: After benchmarks, Ollama unloaded all models. macOS expanded swap to 24 GB during the 35B model run but did not reclaim it. Available RAM is high because model memory was released.
 
-## Comparison with Previous Runs (Dirty Baseline)
+## Comparison with previous runs (dirty baseline)
 
 | Model | Clean tok/s | Dirty tok/s | Delta |
 |-------|-------------|-------------|-------|
@@ -68,7 +68,7 @@ Note: After benchmarks, Ollama unloaded all models. macOS expanded swap to 24 GB
 
 Note: hermes3:8b and gemma4:12b improved significantly on clean baseline. gemma4:26b-mlx was similar. The dirty baseline had swap pressure that slowed smaller models.
 
-## Key Findings
+## Key findings
 
 1. **qwen3.6:35b-a3b is the fastest model** at 47-51 tok/s despite being the largest (21 GB). MoE architecture means only 8 of 128 experts are active per token — effectively processing like a 3B-parameter model.
 

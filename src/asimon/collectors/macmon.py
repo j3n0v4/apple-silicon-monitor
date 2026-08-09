@@ -110,7 +110,7 @@ class MacmonCollector:
             sample = MacmonSample.model_validate(data)
 
             # Enrich with power source and thermal pressure data
-            # These are best-effort — don't let pmset failures kill the sample
+            # These are best-effort — do not let pmset failures kill the sample
             try:
                 power = await self.get_power_status()
                 sample.power_source = power.source

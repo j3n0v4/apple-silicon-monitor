@@ -5,6 +5,7 @@ description = "Real-time hardware + inference monitoring for Apple Silicon LLMs"
 requires-python = ">=3.11"
 license = {text = "MIT"}
 readme = "README.md"
+authors = [{ name = "JD Cordero" }]
 
 dependencies = [
     "prometheus-client>=0.19",

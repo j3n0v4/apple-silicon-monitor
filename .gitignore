@@ -39,3 +39,8 @@ site/
 
 # OS metadata
 Thumbs.db
+
+# Agent / backup
+.hermes/
+*.backup
+.webui_secret_key

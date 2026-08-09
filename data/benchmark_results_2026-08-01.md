@@ -4,7 +4,7 @@ Hardware: MacBook Pro M1 Max, 64GB RAM, macOS Sequoia
 Stack: asimon v0.1.0 + Prometheus + Grafana (Homebrew)
 Method: 3 prompts × 3 models, via asimon proxy (port 11435), stream=false
 
-## Inference Performance
+## Inference performance
 
 | Model | Prompt | Eval Tokens | tok/s | Load Time (s) | Duration (s) |
 |-------|--------|-------------|-------|---------------|---------------|
@@ -18,7 +18,7 @@ Method: 3 prompts × 3 models, via asimon proxy (port 11435), stream=false
 | gemma4:26b-mlx | Medium | 1,759 | 35.48 | 1.79 | 49.57 |
 | gemma4:26b-mlx | Long | 2,318 | 35.51 | 1.79 | 65.27 |
 
-## Hardware During Benchmarks (Prometheus 15s intervals)
+## Hardware during benchmarks (Prometheus 15s intervals)
 
 | Metric | Idle | Peak | Avg |
 |--------|------|------|-----|
@@ -31,7 +31,7 @@ Method: 3 prompts × 3 models, via asimon proxy (port 11435), stream=false
 | Thermal Throttling | 0 | 0 | 0 |
 | Thermal Warning | 0 | 0 | 0 |
 
-## Key Findings
+## Key findings
 
 1. **gemma4:26b-mlx is fastest** — 35-48 tok/s, beating the smaller 12B nvfp4 model.
    MLX format is dramatically more efficient than nvfp4 on Apple Silicon.
@@ -45,7 +45,7 @@ Method: 3 prompts × 3 models, via asimon proxy (port 11435), stream=false
 
 5. **dolphin3-abliterated:8b** is the best small uncensored model at 23-37 tok/s.
 
-## SQLite Raw Data (inference_runs)
+## SQLite raw data (inference_runs)
 
 | id | timestamp | model | prompt_eval | eval | tok/s | load_ns | total_ns |
 |----|-----------|-------|-------------|------|-------|---------|----------|

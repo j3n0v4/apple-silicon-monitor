@@ -1,13 +1,35 @@
-# Apple Silicon Monitor
+<h1 align="center">apple-silicon-monitor</h1>
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](pyproject.toml)
+<p align="center">Real-time hardware + inference monitoring for Apple Silicon LLMs.</p>
 
-Real-time hardware + inference monitoring for Apple Silicon LLMs. Collects GPU/CPU temps, power draw, swap, and Ollama inference metrics — then pipes them into a Grafana dashboard with 26 panels and alerting.
+<p align="center">
+  <a href="#getting-started">Getting Started</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#cli-commands">CLI</a> ·
+  <a href="#what-it-monitors">Metrics</a> ·
+  <a href="#grafana-dashboard">Dashboard</a> ·
+  <a href="#contributing">Contributing</a> ·
+  <a href="#license">License</a>
+</p>
 
-I built this because I wanted to see what my M1 Max was actually doing during LLM inference. `macmon` gives you a terminal snapshot, but I wanted time-series data. Prometheus + Grafana give me that, and `asimon` is the glue.
+<p align="center">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat"></a>
+  <a href="pyproject.toml"><img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11+-blue?style=flat"></a>
+  <a href="https://www.apple.com/macos/"><img alt="Platform: macOS" src="https://img.shields.io/badge/platform-macOS-333333?style=flat"></a>
+  <a href="https://prometheus.io/"><img alt="Metrics: Prometheus" src="https://img.shields.io/badge/metrics-Prometheus-E6522C?style=flat"></a>
+  <a href="https://grafana.com/"><img alt="Dashboard: Grafana" src="https://img.shields.io/badge/dashboard-Grafana-F46800?style=flat"></a>
+  <a href="https://www.sqlite.org/"><img alt="Storage: SQLite" src="https://img.shields.io/badge/storage-SQLite-003B57?style=flat"></a>
+</p>
 
-## Quick Start
+**Why this exists:**
+
+> I wanted to see what my M1 Max was actually doing during LLM inference. `macmon` gives a terminal snapshot, but I wanted time-series data. Prometheus + Grafana give me that, and `asimon` is the glue.
+
+**What it does:**
+
+Collects GPU/CPU temps, power draw, swap, and Ollama inference metrics from Apple Silicon — then pipes them into a Grafana dashboard with 26 panels and alerting.
+
+## Getting started
 
 ```bash
 pip install apple-silicon-monitor
@@ -26,7 +48,7 @@ open http://localhost:3000
 # Dashboard: "Apple Silicon Monitor" (auto-provisioned)
 ```
 
-That's it. You'll see GPU temp, power draw, tok/s by model, swap pressure, and more — all updating in real time.
+The dashboard shows GPU temp, power draw, tok/s by model, swap pressure, and more — all updating in real time.
 
 ## Architecture
 
@@ -34,7 +56,7 @@ That's it. You'll see GPU temp, power draw, tok/s by model, swap pressure, and m
 
 The collector (`asimon serve`) polls `macmon` for hardware metrics and the Ollama API for inference stats, stores them in SQLite, and exposes them as Prometheus metrics on port 9100. The transparent proxy (`asimon proxy`) sits between Ollama and your client on port 11435, capturing tok/s and model load data without changing anything.
 
-## CLI Commands
+## CLI commands
 
 | Command | Description |
 |---------|-------------|
@@ -44,7 +66,7 @@ The collector (`asimon serve`) polls `macmon` for hardware metrics and the Ollam
 | `asimon clean` | Purge system memory and show before/after comparison |
 | `asimon benchmark` | Run a benchmark suite against loaded models |
 
-## What It Monitors
+## What it monitors
 
 | Category | Metrics |
 |----------|---------|
@@ -54,7 +76,7 @@ The collector (`asimon serve`) polls `macmon` for hardware metrics and the Ollam
 | **Inference** | Tokens/s by model, loaded models count, model size, model VRAM |
 | **System** | Uptime, GPU frequency, fan speed (RPM) |
 
-## Grafana Dashboard
+## Grafana dashboard
 
 The dashboard is auto-provisioned when Grafana starts. 26 panels across 5 sections:
 
@@ -62,16 +84,16 @@ The dashboard is auto-provisioned when Grafana starts. 26 panels across 5 sectio
 
 Dashboard UID: `asimon-main` (for programmatic reference).
 
-## Benchmark Data
+## Benchmark data
 
 This tool collects the data. For benchmark results and analysis, see the [apple-silicon-llm-guide](https://github.com/j3n0v4/apple-silicon-llm-guide) project.
 
-Sample data from my M1 Max (64 GB) is in the [data/](data/) directory, including:
+Sample data from an M1 Max (64 GB) system is in the [data/](data/) directory, including:
 
 - Clean baseline benchmarks (4 models × 3 prompts)
 - Swap impact analysis (dirty vs. clean memory)
 
-## Test Hardware
+## Test hardware
 
 | Component | Spec |
 |-----------|------|
@@ -82,7 +104,7 @@ Sample data from my M1 Max (64 GB) is in the [data/](data/) directory, including
 | OS | macOS Sequoia 26.6 |
 | Stack | asimon v0.1.0 + Prometheus + Grafana (Homebrew) |
 
-I only have data for M1 Max 64 GB. If you're on a different config, run `asimon benchmark` and open a PR with your results.
+The included data covers M1 Max 64 GB only. On a different config, run `asimon benchmark` and open a PR with your results.
 
 ## Configuration
 
@@ -107,4 +129,4 @@ Contributions are welcome! This is a community project.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+[MIT](LICENSE) &copy; 2026 JD Cordero

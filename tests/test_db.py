@@ -1,5 +1,7 @@
 """Tests for the SQLite storage layer."""
 
+from datetime import UTC, datetime
+
 import pytest
 
 from asimon.storage.db import Database
@@ -84,7 +86,7 @@ class TestDatabaseInit:
 
     @pytest.mark.asyncio
     async def test_migration_idempotent(self):
-        """Test that running migrations twice doesn't error."""
+        """Test that running migrations twice does not error."""
         database = Database(db_path=":memory:")
         await database.init_db()
 
@@ -108,7 +110,7 @@ class TestHardwareSamples:
 
     @pytest.mark.asyncio
     async def test_insert_and_count(self, db):
-        """Test inserting a hardware sample and verifying it's stored."""
+        """Test inserting a hardware sample and verifying it is stored."""
         row_id = await db.insert_hardware_sample(
             {
                 "timestamp": "2026-08-01T12:00:00+00:00",
@@ -326,7 +328,7 @@ class TestCleanup:
         # Insert a recent record
         await db.insert_hardware_sample(
             {
-                "timestamp": "2026-08-01T12:00:00+00:00",
+                "timestamp": datetime.now(UTC).isoformat(),
                 "cpu_power": 2.0,
             }
         )

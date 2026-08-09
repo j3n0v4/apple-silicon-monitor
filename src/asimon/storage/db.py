@@ -259,7 +259,7 @@ class Database:
         """Get the latest tokens_per_second and duration per model from the last 10 minutes.
 
         Returns a list of dicts with keys: model_name, tokens_per_second, eval_duration_seconds.
-        Returns an empty list if the DB is empty or the table doesn't exist.
+        Returns an empty list if the DB is empty or the table does not exist.
         """
         try:
             conn = await self._ensure_connection()
